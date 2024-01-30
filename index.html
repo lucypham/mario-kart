@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 6</title>
+    <style>
+        body {
+            background-image: url("images/background4.avif");
+            background-size: cover;
+            background-position: center;
+            width: 100%; 
+            padding: 0; 
+            margin: 0; 
+        }
+        .container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+        } 
+        #rainbow-road {
+            display: flex;
+            justify-content: center;
+            width:200px;
+            margin:0 auto;
+            margin-top:300px;
+            height:500px;
+            padding:0px 20px 0px 20px;
+            bottom:0;
+        }
+        #rainbow-road img {
+            width:100%;
+            margin-top:-100px;
+            align-self: flex-start;
+        }
+        #rainbow-road img:hover {
+            cursor: pointer;
+        }
+        .red-shell {
+            position: fixed;
+            top:500px;
+            left:300px;
+            width:100px;
+            animation: redshell 2s infinite;
+        }
+        .green-shell {
+            position: fixed;
+            top:400px;
+            right:250px;
+            width:100px;
+            animation: greenshell 3s infinite;
+        }
+        @keyframes redshell {
+            0% {top:500px;} 
+            50% {top:420px;} 
+            100% {top:500px;} 
+        }
+        @keyframes greenshell {
+            0% {top:400px;} 
+            50% {top:380px;} 
+            100%{top:400px;} 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="rainbow-road">
+            <img id="character" onclick="changeCharacter()" src="images/mario.png">
+        </div>
+        <img class="red-shell" src="images/red-shell.webp">
+        <img class="green-shell" src="images/green-shell.webp">
+    </div>
+    <script>
+        /* RAINBOW ROAD */
+        function changeRainbowRoad() {
+            var red = Math.floor(Math.random() * 256);
+            var green = Math.floor(Math.random() * 256);
+            var blue = Math.floor(Math.random() * 256);
+
+            var rgbColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+
+            document.getElementById("rainbow-road").style.backgroundColor = rgbColor;
+            document.getElementById("rainbow-road").style.transition = "all 0.5s";
+
+            console.log("Generated RGB Color:", rgbColor);
+        }
+
+        setInterval(changeRainbowRoad, 100);
+
+        /* Change Character */
+        var characters = ["images/yoshi.png", "images/mario.png", "images/princess-peach.png"];
+
+        document.addEventListener("click", function(){
+            // Get all span elements
+            var currentCharacter = document.querySelectorAll("#character");
+
+            // Apply a random color to each span
+            currentCharacter.forEach(function changeCharacter(img) {
+                // Generate a random index based on the array length
+                var randomIndex = Math.floor(Math.random() * characters.length);
+
+                // Select a color from the array using the random index
+                var randomCharacter = characters[randomIndex];
+
+                // Apply the selected color to the span element
+                img.src = randomCharacter;
+
+                // Logging the color and random index
+                console.log("Selected Text Color:", randomCharacter);
+                console.log("Random Index:", randomIndex);
+            });
+        });
+    </script>
+</body>
+</html>
